@@ -134,7 +134,7 @@ if __name__ == "__main__":
     """
 
     # Retrieve the current running configuration
-    #get_running_config()
+    get_running_config()
 
     # Retrieve the device's capabilities
     get_capabilities()
