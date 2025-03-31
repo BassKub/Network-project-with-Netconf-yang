@@ -3,18 +3,6 @@
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <version>17.12</version>
     <boot-start-marker/>
-    <boot>
-      <system>
-        <bootfile>
-          <filename-list-ordered-by-user>
-            <filename>flash:isr4300-universalk9.17.12.04a.SPA.bin</filename>
-          </filename-list-ordered-by-user>
-          <filename-list>
-            <filename>flash:isr4300-universalk9.17.12.04a.SPA.bin</filename>
-          </filename-list>
-        </bootfile>
-      </system>
-    </boot>
     <boot-end-marker/>
     <memory>
       <free>
@@ -46,23 +34,18 @@
           </monitor>
         </utilization>
       </qfp>
+      <punt-keepalive xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-platform">
+        <disable-kernel-core>true</disable-kernel-core>
+      </punt-keepalive>
     </platform>
-    <hostname>R1</hostname>
+    <hostname>Test1234</hostname>
     <username>
       <name>admin</name>
       <privilege>15</privilege>
       <secret>
         <encryption>9</encryption>
-        <secret>$14$lj2s$CO2sfgtURg8LyE$3McxIuYjxbtzedCS3BqRbi7AtTFtbiiXcVXnEYiO.TI</secret>
+        <secret>$9$EwmeT3WV09UPXE$UzOKsEnI59GxqnjuuQykD.RWYqafSXGw0HmRZDQEtME</secret>
       </secret>
-    </username>
-    <username>
-      <name>bass</name>
-      <privilege>15</privilege>
-      <password>
-        <encryption>0</encryption>
-        <password>bass16559</password>
-      </password>
     </username>
     <vrf>
       <definition>
@@ -75,7 +58,7 @@
     </vrf>
     <ip>
       <domain>
-        <name>cdti.co.th</name>
+        <name>CDTI.ac.th</name>
       </domain>
       <forward-protocol>
         <protocol>nd</protocol>
@@ -87,36 +70,6 @@
         <route-limit xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-multicast">2147483647</route-limit>
       </multicast>
       <ssh>
-        <client>
-          <algorithm>
-            <encryption>
-              <aes128-ctr/>
-              <aes192-ctr/>
-              <aes256-ctr/>
-            </encryption>
-          </algorithm>
-        </client>
-        <pubkey-chain>
-          <username>
-            <name>bass</name>
-            <key-hash>
-              <key-type>ssh-rsa</key-type>
-              <key-hash-value>F41740C03526B98E6BAEA3212EB2633F</key-hash-value>
-            </key-hash>
-          </username>
-        </pubkey-chain>
-        <rsa>
-          <keypair-name>SSH-KEY</keypair-name>
-        </rsa>
-        <server>
-          <algorithm>
-            <encryption>
-              <aes128-ctr/>
-              <aes192-ctr/>
-              <aes256-ctr/>
-            </encryption>
-          </algorithm>
-        </server>
         <version>2</version>
         <bulk-mode>
           <window-size>131072</window-size>
@@ -131,8 +84,11 @@
         </source-interface>
       </tftp>
       <http xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-http">
-        <server>false</server>
-        <secure-server>false</secure-server>
+        <authentication>
+          <local/>
+        </authentication>
+        <server>true</server>
+        <secure-server>true</secure-server>
       </http>
       <igmp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-igmp">
         <snooping>
@@ -186,14 +142,7 @@
       </GigabitEthernet>
       <GigabitEthernet>
         <name>0/0/0</name>
-        <ip>
-          <address>
-            <primary>
-              <address>192.168.10.2</address>
-              <mask>255.255.255.0</mask>
-            </primary>
-          </address>
-        </ip>
+        <shutdown/>
         <logging>
           <event>
             <link-status/>
@@ -218,11 +167,10 @@
       </GigabitEthernet>
       <GigabitEthernet>
         <name>0/0/1</name>
-        <media-type>rj45</media-type>
         <ip>
           <address>
             <primary>
-              <address>192.168.20.3</address>
+              <address>192.168.100.1</address>
               <mask>255.255.255.0</mask>
             </primary>
           </address>
@@ -337,11 +285,6 @@
         <pid>ISR4321/K9</pid>
         <sn>FDO20381F26</sn>
       </udi>
-      <boot>
-        <level>
-          <securityk9/>
-        </level>
-      </boot>
     </license>
     <standby>
       <redirects>true</redirects>
@@ -416,13 +359,8 @@
     <interface>
       <name>GigabitEthernet0/0/0</name>
       <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
-      <enabled>true</enabled>
-      <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip">
-        <address>
-          <ip>192.168.10.2</ip>
-          <netmask>255.255.255.0</netmask>
-        </address>
-      </ipv4>
+      <enabled>false</enabled>
+      <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
       <ipv6 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"/>
     </interface>
     <interface>
@@ -431,7 +369,7 @@
       <enabled>true</enabled>
       <ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip">
         <address>
-          <ip>192.168.20.3</ip>
+          <ip>192.168.100.1</ip>
           <netmask>255.255.255.0</netmask>
         </address>
       </ipv4>
@@ -550,25 +488,16 @@
       <config>
         <name>GigabitEthernet0/0/0</name>
         <type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">ianaift:ethernetCsmacd</type>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </config>
       <subinterfaces>
         <subinterface>
           <index>0</index>
           <config>
             <index>0</index>
-            <enabled>true</enabled>
+            <enabled>false</enabled>
           </config>
           <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
-            <addresses>
-              <address>
-                <ip>192.168.10.2</ip>
-                <config>
-                  <ip>192.168.10.2</ip>
-                  <prefix-length>24</prefix-length>
-                </config>
-              </address>
-            </addresses>
             <proxy-arp>
               <config>
                 <mode>ALL</mode>
@@ -611,9 +540,9 @@
           <ipv4 xmlns="http://openconfig.net/yang/interfaces/ip">
             <addresses>
               <address>
-                <ip>192.168.20.3</ip>
+                <ip>192.168.100.1</ip>
                 <config>
-                  <ip>192.168.20.3</ip>
+                  <ip>192.168.100.1</ip>
                   <prefix-length>24</prefix-length>
                 </config>
               </address>
@@ -989,8 +918,8 @@
   </components>
   <system xmlns="http://openconfig.net/yang/system">
     <config>
-      <hostname>R1</hostname>
-      <domain-name>cdti.co.th</domain-name>
+      <hostname>Test1234</hostname>
+      <domain-name>CDTI.ac.th</domain-name>
     </config>
     <ntp>
       <config>
@@ -1011,15 +940,7 @@
             <username>admin</username>
             <config>
               <username>admin</username>
-              <password-hashed>$14$lj2s$CO2sfgtURg8LyE$3McxIuYjxbtzedCS3BqRbi7AtTFtbiiXcVXnEYiO.TI</password-hashed>
-              <role xmlns:oc-aaa-types="http://openconfig.net/yang/aaa/types">oc-aaa-types:SYSTEM_ROLE_ADMIN</role>
-            </config>
-          </user>
-          <user>
-            <username>bass</username>
-            <config>
-              <username>bass</username>
-              <password>bass16559</password>
+              <password-hashed>$9$EwmeT3WV09UPXE$UzOKsEnI59GxqnjuuQykD.RWYqafSXGw0HmRZDQEtME</password-hashed>
               <role xmlns:oc-aaa-types="http://openconfig.net/yang/aaa/types">oc-aaa-types:SYSTEM_ROLE_ADMIN</role>
             </config>
           </user>
@@ -1028,7 +949,7 @@
     </aaa>
     <alarms>
       <alarm>
-        <id>1090/1</id>
+        <id>1090/0</id>
       </alarm>
       <alarm>
         <id>7038/2</id>
